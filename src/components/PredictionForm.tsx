@@ -10,8 +10,10 @@ import { isEmpty } from "lodash";
 const PredictionForm = ({
 	gameID,
 }: InferProps<typeof predictionFormPropTypes>) => {
+  // Fill state with data from local storage
 	const localStorageItem = localStorage.getItem(gameID) ?? "{}";
 	const prediction = JSON.parse(localStorageItem);
+
 	const [HTScore, setHTScore] = React.useState<string>(
 		prediction?.htscore ?? ""
 	);
@@ -23,6 +25,7 @@ const PredictionForm = ({
 	);
 
 	const inputIsValid = (input: string) => {
+    // We want the input to be a number
 		if (isNaN(parseInt(input.trim()))) {
 			return false;
 		}
@@ -30,11 +33,11 @@ const PredictionForm = ({
 	};
 
 	const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-		// localStorage will take the match's game id and utilize prediction scores of both teams as it's value
+		// localStorage will take the match's game id and utilize prediction scores of both teams as its value
 		event.preventDefault();
 
 		if (!inputIsValid(HTScore) || !inputIsValid(ATScore)) {
-			// Add error message
+			// Add error state and message to the form
 			return;
 		}
 
@@ -47,9 +50,11 @@ const PredictionForm = ({
 		setIsSubmitted(true);
 	};
 
+  const renderPrediction = isSubmitted && !isEmpty(prediction);
+
 	return (
 		<div>
-			{isSubmitted && !isEmpty(prediction) ? (
+			{renderPrediction ? (
 				<PredictedScore htscore={HTScore} atscore={ATScore} />
 			) : (
 				<Box
@@ -77,7 +82,7 @@ const PredictionForm = ({
 								setATScore(ev.target.value)
 							}
 						/>
-						{/* When a user clicks submit, the values will display next to the match and stored in localStorage */}
+						{/* When a user clicks submit, the values will display next to the match and be stored in localStorage */}
 						<button type="submit">
 							<CheckIcon />
 						</button>

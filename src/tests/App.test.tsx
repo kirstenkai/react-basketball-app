@@ -21,6 +21,7 @@ test("checks if the page renders the response data correctly", async () => {
 			},
 		],
 	});
+
 	mockAdapter.onGet(`${API_URL}${GAMES}`).replyOnce(200, {
 		response: [
 			{
