@@ -18,15 +18,15 @@ test("checks if prediction score is submitted", () => {
 	fireEvent.click(screen.getByRole("button"));
 
 	expect(screen.queryAllByRole("textbox").length).toEqual(0);
-  screen.getByText("5");
+	screen.getByText("5");
 	screen.getByText("10");
-  
+
 	localStorage.removeItem("2");
 });
 
 test("checks if prediction score is not submitted if only one box is filled", () => {
 	render(<PredictionForm gameID="3" />);
-  
+
 	const inputs = screen.getAllByRole("textbox");
 	fireEvent.change(inputs[0], { target: { value: "5" } });
 	fireEvent.click(screen.getByRole("button"));

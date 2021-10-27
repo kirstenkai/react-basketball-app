@@ -12,34 +12,33 @@ test("checks if the page renders the response data correctly", async () => {
 			{
 				id: "1",
 				league: { name: "KC" },
-        teams: {
-          home: { name: "Raptors" },
-          away: { name: "Pacers" },
-        },
+				teams: {
+					home: { name: "Raptors" },
+					away: { name: "Pacers" },
+				},
 				date: "2021-10-29",
 				country: { name: "Canada" },
 			},
 		],
 	});
-  mockAdapter.onGet(`${API_URL}${GAMES}`).replyOnce(200, {
+	mockAdapter.onGet(`${API_URL}${GAMES}`).replyOnce(200, {
 		response: [
 			{
 				id: "2",
 				league: { name: "KC" },
-        teams: {
-          home: { name: "Lakers" },
-          away: { name: "Spurs" },
-        },
+				teams: {
+					home: { name: "Lakers" },
+					away: { name: "Spurs" },
+				},
 				date: "2021-10-30",
 				country: { name: "USA" },
 			},
 		],
 	});
 
-
 	render(<App />);
 
-  const leagues = await screen.findAllByText("KC");
+	const leagues = await screen.findAllByText("KC");
 	expect(leagues.length).toEqual(2);
 
 	screen.getByText("Raptors");

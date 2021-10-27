@@ -22,24 +22,24 @@ const PredictionForm = ({
 		!isEmpty(prediction)
 	);
 
-  const inputIsValid = (input: string) => {
-    if (isNaN(parseInt(input.trim()))) {
-      return false;
-    }
-    return true;
-  }
+	const inputIsValid = (input: string) => {
+		if (isNaN(parseInt(input.trim()))) {
+			return false;
+		}
+		return true;
+	};
 
 	const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
 		// localStorage will take the match's game id and utilize prediction scores of both teams as it's value
 		event.preventDefault();
 
-    if (!inputIsValid(HTScore) || !inputIsValid(ATScore)) {
-      // Add error message 
-      return;
-    }
-    
+		if (!inputIsValid(HTScore) || !inputIsValid(ATScore)) {
+			// Add error message
+			return;
+		}
+
 		const newPrediction = {
-      htscore: HTScore.trim(),
+			htscore: HTScore.trim(),
 			atscore: ATScore.trim(),
 		};
 
