@@ -1,4 +1,4 @@
-# React Basketball Matches
+# GameOn React Code Challenge
 
 The application presents upcoming basketball matches for the next 2 days and allows users to submit a prediction on the final score.
 
